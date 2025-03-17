@@ -1,5 +1,8 @@
 import axios from "axios";
 import { BigNumber } from "bignumber.js";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 class CMC {
     private _headers: object;
@@ -20,7 +23,7 @@ class CMC {
             );
             const price = new BigNumber(response.data.data.quote.USD.price).toFixed(4, 1);
             return price;
-        } catch (error) {
+        } catch (error: any) {
             console.error("CMC get token price error: ", error);
             return "0";
         }
@@ -38,8 +41,6 @@ class CMC {
             if (response.data.status.error_code !== 0) {
                 throw new Error(response.data.status.error_message);
             }
-
-            return response;
 
             if (Object.values(response.data.data).length == 0) {
                 throw new Error("The token does not existed");

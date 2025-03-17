@@ -11,7 +11,8 @@
     "web3": "./build/index.js"
   },
   "scripts": {
-    "build": "tsc && node -e \"require('fs').chmodSync('build/index.js', '755')\""
+    "build": "tsc && node -e \"require('fs').chmodSync('build/index.js', '755')\"",
+    "test": "jest"
   },
   "files": [
     "build"
@@ -20,10 +21,15 @@
     "@modelcontextprotocol/sdk": "^1.1.0",
     "axios": "^1.7.9",
     "bignumber.js": "^9.1.2",
+    "dotenv": "^16.4.7",
     "zod": "^3.24.1"
   },
   "devDependencies": {
+    "@jest/globals": "^29.7.0",
+    "@types/jest": "^29.5.14",
     "@types/node": "^22.10.5",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.2.6",
     "typescript": "^5.7.2"
   }
 }

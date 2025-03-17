@@ -3,6 +3,7 @@ import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js"
 import { CallToolRequestSchema, ListToolsRequestSchema } from "@modelcontextprotocol/sdk/types.js";
 import { tools } from "./tools.js";
 import { z } from "zod";
+import cmc from "./modules/cmc.js";
 
 // Define Zod schemas for validation
 const PriceArgsSchema = z.object({
@@ -43,7 +44,11 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
         switch (name) {
             case "get_token_price": {
                 const { symbol } = PriceArgsSchema.parse(args);
-                const price = 1000;
+                const currencyData = await cmc.idMap(symbol);
+                if (!currencyData) {
+                    throw new Error(`Could not find token with symbol ${symbol}`);
+                }
+                const price = await cmc.price(currencyData.id);
                 return {
                     content: [
                         {
