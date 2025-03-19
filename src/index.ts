@@ -58,22 +58,6 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
                     ],
                 };
             }
-            case "get_token_info": {
-                const { contractAddress } = InfoArgsSchema.parse(args);
-                const info = {
-                    name: "Test Token",
-                    symbol: "TT",
-                    totalSupply: 1000000,
-                };
-                return {
-                    content: [
-                        {
-                            type: "text",
-                            text: `Name: ${info.name}\nSymbol: ${info.symbol}\nTotal Supply: ${info.totalSupply}`,
-                        },
-                    ],
-                };
-            }
             default:
                 throw new Error("Unknown tool");
         }

@@ -12,19 +12,5 @@ export const tools = [
             },
             required: ["symbol"],
         },
-    },
-    {
-      name: "get_token_info",
-      description: "Get token details",
-      inputSchema: {
-          type: "object",
-          properties: {
-              contractAddress: {
-                  type: "string",
-                  description: "The token contract address",
-              },
-          },
-          required: ["contractAddress"],
-      },
-  },
+    }
 ];
